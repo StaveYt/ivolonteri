@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../assets\css\style1.css" rel="stylesheet">
+    <title>Lokalne Akcije</title>
+</head>
+<body class="bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">iVolonteri</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="zapisnik.html">Zapisnik Sati</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="akcije.html">Pregledaj Volonterske Akcije</a>
+          </li>
+        </ul>
+        <form class="d-flex" onsubmit="return Pretraži(event)">
+          <input class="form-control me-2" id="search" type="search" placeholder="Split" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Pretraži</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container" id="container">
+    <div class="search"></div>
+    <div class="akcije">
+      <div class="card" style="width: 18rem; margin: 5px; display: inline-block;"> <!--OD OVOG-->
+        <img src="../assets/img/brackeSape.jpg" class="card-img-top" alt="Spašeni pas">
+        <div class="card-body">
+          <h5 class="card-title">Bračke šape, Otok Brač</h5>
+          <p class="card-text">Skupina volontera i ljubitelja životinja koji će na našem otoku pokušati pomoći životinjama koje pomoć trebaju.</p>
+          <a href="https://hr-hr.facebook.com/BrackeSape/" class="btn btn-primary">Posjetite stranicu akciju</a>
+        </div>
+      </div> <!--DO OVOG-->
+      <div class="card" style="width: 18rem; margin: 5px; display: inline-block;"> <!--OD OVOG-->
+        <img src="../assets/img/splitskeSape.jpg" class="card-img-top" alt="Spašeni pas">
+        <div class="card-body">
+          <h5 class="card-title">Splitske šape, Split</h5>
+          <p class="card-text">Oglašavanje izgubljenih ljubimaca za područje grada Splita. Pomoć kod traženja smještaja, liječenja ili financiranja liječenja i hrane.</p>
+          <a href="https://hr-hr.facebook.com/SplitskeSape/" class="btn btn-primary">Posjetite stranicu akciju</a>
+        </div>
+      </div> <!--DO OVOG-->
+      <div class="card" style="width: 18rem; margin: 5px; display: inline-block;"> <!--OD OVOG-->
+        <img src="../assets/img/crveniKriz.jpg" class="card-img-top" alt="volonteri crvenog križa">
+        <div class="card-body">
+          <h5 class="card-title">Crveni križ, Split</h5>
+          <p class="card-text">Splitski ogranak humanitarne organizacije Crveni križ.</p>
+          <a href="https://www.hck.hr/adresar/splitsko-dalmatinska/65" class="btn btn-primary">Posjetite stranicu akciju</a>
+        </div>
+      </div> <!--DO OVOG-->
+      <div class="card" style="width: 18rem; margin: 5px; display: inline-block;"> <!--OD OVOG-->
+        <img src="../assets/img/pokretOtoka.png" class="card-img-top" alt="logo Pokreta otoka">
+        <div class="card-body">
+          <h5 class="card-title">Pokret Otoka, Šolta</h5>
+          <p class="card-text">Pokret otoka okuplja brojne otočane i stručnjake koji žele doprinijeti održivom razvoju hrvatskih otoka. Brojimo desetke volontera iz cijele Hrvatske, različitih vještina i iskustava koji redovito doprinose radu udruge kroz virtualan rad od kuće. Svim volonterima omogućavamo mentorstvo, informiranje i umrežavanje sa zanimljivim i proaktivnim pojedincima.</p>
+          <a href="https://www.otoci.eu/volontiraj/" class="btn btn-primary">Posjetite stranicu akciju</a>
+        </div>
+      </div> <!--DO OVOG-->
+      <div class="card" style="width: 18rem; margin: 5px; display: inline-block;"> <!--OD OVOG-->
+        <img src="../assets/img/ekoZadar.jpg" class="card-img-top" alt="EKO Zadar volonteri">
+        <div class="card-body">
+          <h5 class="card-title">EKO Zadar, Zadar</h5>
+          <p class="card-text">Udruga Eko-Zadar korisnica je institucionalne podrške Nacionalne zaklade za razvoj civilnoga društva za stabilizaciju i razvoj udruge.</p>
+          <a href="https://ekozadar.hr/" class="btn btn-primary">Posjetite stranicu akciju</a>
+        </div>
+      </div> <!--DO OVOG-->
+      <div class="card" style="width: 18rem; margin: 5px; display: inline-block;"> <!--OD OVOG-->
+        <img src="../assets/img/burzaDobrote.png" class="card-img-top" alt="logo Pokreta otoka">
+        <div class="card-body">
+          <h5 class="card-title">Burza Dobrote, Dubrovnik</h5>
+          <p class="card-text">Burza Dobrote je projekt Udruge za razvoj civilnog društva Bonsai koji promovira volonterstvo kao način aktivnog sudjelovanja u društvu, te doprinosi unapređenju postojeće volonterske infrastrukture. Projektom se želi podići svijest o prednostima dobrovoljnog sudjelovanja u izgradnji bolje i sretnije zajednice, te dugoročno osigurati kvalitetno i svrhovito volontiranje na području grada Dubrovnika.</p>
+          <a href="https://www.burzadobrote.com/" class="btn btn-primary">Posjetite stranicu akciju</a>
+        </div>
+      </div> <!--DO OVOG-->
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+</html>

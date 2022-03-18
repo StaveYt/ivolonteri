@@ -1,0 +1,46 @@
+
+.bottom_button {
+    transition: 1s;
+    position: fixed;
+    bottom: 50%;
+    font-size: large;
+    margin-right: 20px;
+    margin-left: 10px;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    width: 41px;
+}
+
+.bottom-items{
+    transition: 1s;
+    position: fixed;
+    bottom: 0%;
+    height: 50%;
+    width: 550px;
+    background-color: rgba(73, 141, 118, 0.95);
+    margin-left: 10px;
+    border: 5px solid rgb(42, 82, 69);
+    overflow: auto;
+}
+
+.hidden-bottom-button{
+    bottom: -10px;
+}
+
+.hidden-bottom-items{
+    bottom: -50%; 
+}
+
+.filter-check{
+    margin: 5px;
+    
+}
+
+.filter{
+
+}
+
+.filter-check-input{
+    padding: 8px;
+    margin: auto;
+}

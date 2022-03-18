@@ -9,5 +9,25 @@
 }
 
 body {
-  background-image: url(..\img/paul.png);
+  font-family: Helvetica;
+  height: 100vh;
+}
+
+.main-img{
+  margin: auto;
+  opacity: 70%;
+}
+
+
+
+.carousel-text{
+  padding-bottom: 40%;
+  font-weight: bold;
+  font-family: monospace; 
+}
+
+.akcija-card{
+  width: 19rem;
+  margin: 3px;
+  display: inline-block;
 }

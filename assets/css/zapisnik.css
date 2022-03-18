@@ -1,0 +1,55 @@
+body{
+    background-image: url('../img/loginBackround.jpg');
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    margin-bottom: 10px;
+}
+
+.log-in-box{
+    width: 320px;
+    height: 420px;
+    color: #fff;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -25%;
+    left: calc(50% - 50px);
+
+}
+
+.notice{
+    width: 320px;
+    background-color: rgb(15, 134, 128);
+    border-radius: 50px;
+    text-align: center;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+
+.zapisnik-card{
+    width: 15rem;
+    margin: 1.5px;
+    display: inline-block;
+}
+
+

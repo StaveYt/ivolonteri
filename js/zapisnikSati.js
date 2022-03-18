@@ -1,87 +1,80 @@
 //STVARAMO OBJEKTE KORISNIKA
 let user0 = {
-    username: "user0", //U METODU username STAVLJAMO KORISNIČKO IME
-    password: "user0", //U METODU password STAVLJAMO PASSWORD KORISNIKA
-    rank: "user", //U METODU rank STAVLJAMO RANK KORISNIKA (user ili admin)
+  username: "user0", //U METODU username STAVLJAMO KORISNIČKO IME
+  password: "user0", //U METODU password STAVLJAMO PASSWORD KORISNIKA
+  rank: "user", //U METODU rank STAVLJAMO RANK KORISNIKA (user ili admin)
 
-    //U METODU zapisano STAVARMO NIZ SA OBJEKTIMA KOJE IMAJU INFORMACIJE O AKCIJAMA U KOJEM JE KORISNIK SUDJELOVAO
-    zapisano: [
+  //U METODU zapisano STAVARMO NIZ SA OBJEKTIMA KOJE IMAJU INFORMACIJE O AKCIJAMA U KOJEM JE KORISNIK SUDJELOVAO
+  zapisano: [
     zapis0 = {
-        akcija: "Boranka",
-        mjesto: "Split",
-        biljeska: "Na Mosoru smo sadili ",
-        sati: "10",
-        link: ""
+      akcija: "Boranka",
+      mjesto: "Split",
+      biljeska: "Na Mosoru smo sadili (nadam se da nam ne oduzmete bodove za šalu)",
+      sati: "10",
+      link: "https://bit.ly/Ur3uM"
     }, zapis1 = {
-        akcija: "akcija",
-        mjesto: "mjesto",
-        biljeska: "Neka kratka biljeska o tome sta ste radili",
-        sati: "11",
-        link: ""
+      akcija: "EKO Zadar",
+      mjesto: "Zadar",
+      biljeska: "Bilo je vrlo zabavno",
+      sati: "11",
+      link: "https://bit.ly/Ur3uM"
     }, zapis2 = {
-        akcija: "akcija",
-        mjesto: "mjesto",
-        biljeska: "Neka kratka biljeska o tome sta ste radili",
-        sati: "12",
-        link: ""
+      akcija: "Crveni križ",
+      mjesto: "Split",
+      biljeska: "Pomagali smo beskućnicima",
+      sati: "12",
+      link: "https://bit.ly/Ur3uM"
     }, zapis3 = {
-        akcija: "akcija",
-        mjesto: "mjesto",
-        biljeska: "Neka kratka biljeska o tome sta ste radili",
-        sati: "13",
-        link: "https://bit.ly/Ur3uM"
+      akcija: "Bračke Šape",
+      mjesto: "Brač",
+      biljeska: "Išli smo na Brač pomagati životinjama",
+      sati: "13",
+      link: "https://bit.ly/Ur3uM"
     }
-    ]
+  ]
 }; let admin0 = {
-    username: "admin0",
-    password: "admin0",
-    rank: "admin"
+  username: "admin0",
+  password: "admin0",
+  rank: "admin"
 }
 
+let loggedIn = false; //BOOLEAN KOJI OZNAČAVA JE LI KORISNIK ULOGIRAN ILI NIJE
 let users = [user0, admin0]; //NIZ U KOJEMU SU SVI KORISNICI
+let trenutniUser = users[0]; //VARIJABLA U KOJOJ SE NALAZI TRENUTNI KORISNIK (kao placeholder je korisnik sa indexom 0)
 
-let usernameInp = document.getElementById('username-inp');
-let passwordInp = document.getElementById('password-inp');
-let logInForm = document.getElementById('log-in');
-let row1 = document.getElementById('row1');
+//DOBIVANJE ELEMENATA IZ HTMLA
+let usernameInp = document.getElementById('username-inp'); //DOBIVANJE INPUT ELEMENTA ZA USERNAME
+let passwordInp = document.getElementById('password-inp'); //DOBIVANJE INPUT ELEMENTA ZA PASSWORD
+let logInForm = document.getElementById('log-in'); //DOBIVANJE FORM ELEMENTA ZA LOGIN
+let row1 = document.getElementById('row1'); //DOBIVANJE DIV ELEMENTA U KOJI ĆEMO POSLIJE STAVLJATI ELEMENTE
 
-//DEFINIRAMO VARIJABLE U KOJE ĆEMO POSLI STAVLJAT INFORMACIJE
-let zapisani;
+let zapisaniEl; //DEFINIRAMO VARIJABLU zapisaniEl U KOJU ĆEMO POSLIJE DODATI DIV ELEMENT
 
-let zapisivanjeFormvanje;
-let imeAkcijeInpije;
-let biljeskaInpka;
-let mjestoInp;
-let satiInp;
-let linkInp;
 
-//VARIJABLA U KOJOJ SE NALAZI TRENUTNI KORISNIK (kao placeholder je korisnik sa indexom 0)
-let trenutniUser = users[0]; 
+function LogIn(e) {
+  e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
 
-function LogIn(e){
-    e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
-    
-    for(let i = 0; i < users.length; i++){
-
-        //PREGLEDAVAMO JE LI 
-        if(usernameInp.value == users[i].username && passwordInp.value == users[i].password){
-            alert("YOU HAVE LOGGED IN");
-            row1.removeChild(logInForm);
-            PrikažiZapisnik(i);
-        }
-
+  //PETLJA 
+  for (let i = 0; i < users.length; i++) {
+    //PREGLEDAVAMO JE LI KORISNIK UNIO TOČNU SIFRU I PASSWORD I AKO JE ONDA MU PRIKAZUJEMO NJEGOV ZAPISNIK
+    if (usernameInp.value == users[i].username && passwordInp.value == users[i].password) {
+      loggedIn = true; //MIJENJAMO BOOLEAN loggedIn U true
+      trenutniUser = users[i]; //STAVLJAMO VARIJABLU trenutniUser KAO users[i] JER SE TAJ USER ULOGIRAO
+      PrikaziZapisnik(); //ZOVEMO FUNKCIJU PrikaziZapisnik
     }
-
-    console.log('test');
+  }
+  //AKO JE BOOLEAN loggedIn false ONDA ZNAMO DA SE KORISNIK NIJE USPIO ULOGIRATI I ALERTAMO GA SA PORUKOM 
+  if (!loggedIn) {
+    alert("You have entered a wrong password or username!");
+  }
 }
 
-function PrikažiZapisnik(id){
-    trenutniUser = users[id];
-
-    container.innerHTML = `<div class="row text-center text-white" id="row1">
+function PrikaziZapisnik() {
+  //MIJENJAMO HTML UNUTAR ELEMENTA container
+  container.innerHTML = `<div class="row text-center text-white" id="row1">
     <h2 class="username" id="username">${trenutniUser.username}</h2>
-  </div>
-  <div class="row" id="row2">
+    </div>
+    <div class="row" id="row2">
     <div class="col-md-4" id="zapisivanje">
       <form class="text-white zapisivanje" onsubmit="return Zapisi(event)">
         <legend>Zapišite sate</legend>
@@ -102,7 +95,9 @@ function PrikažiZapisnik(id){
             <option value="Zadar">Zadar</option>
             <option value="Šolta">Šolta</option>
             <option value="Brač">Brač</option>
-            <option value="Šibenik">Šibenik</option>
+            <option value="Omiš">Omiš</option>
+            <option value="Kaštela">Kaštela</option>
+            <option value="Trogir">Trogir</option>
           </select>
         </div>
         <div class="mb-3">
@@ -113,58 +108,62 @@ function PrikažiZapisnik(id){
           <label for="link" class="form-label">Upišite link</label>
           <input type="text" id="link" class="form-control" placeholder="https://bit.ly/Ur3um">
         </div>
-        <button type="submit" class="btn btn-secondary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
-    <div class="zapisani col" id="zapisani">
+    <div class="zapisani col text-dark" id="zapisani">
       </div>
     </div>
-    </div>`;
+  </div>`;
 
-    zapisaniEl = document.getElementById('zapisani');
+  zapisaniEl = document.getElementById('zapisani'); //DOBIVAMO ELEMENT SA IDom zapisani
 
-    for(let i = 0; i < trenutniUser.zapisano.length; i++){
-        let trenutniZapis = trenutniUser.zapisano[i];
-        zapisaniEl.innerHTML += `<div class="card" style="width: 18rem; margin: 2px; display: inline-block;">
-        <div class="card-body">
-          <h5 class="card-title">${trenutniZapis.akcija}, ${trenutniZapis.mjesto}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Biljeska</h6>
-          <p class="card-text">${trenutniZapis.biljeska}</p>
-          <h6 class="card-subtitle mb-2 text-muted">${trenutniZapis.sati} sati</h6>
-          <a href="${trenutniZapis.link}" class="card-link link-dark">Posjetite grupu</a>
-        </div>
-      </div>`
-    }
+  for (let i = 0; i < trenutniUser.zapisano.length; i++) {
+    let trenutniZapis = trenutniUser.zapisano[i]; //STVARAMO VARIJABLU KOJA SADRZI TRENUTNI ZAPIS KOJI JE JEDNAK OBJEKTU SA INDEXOM i U NIZU zapisano TRENUTNOG KORISNIKA
+    
+    //U HTML ELEMENTA zapisani DODAJEMO KARTICU SA INFORMACIJAMA O ZAPISANOM SATU
+    zapisaniEl.innerHTML += `<div class="card zapisnik-card">
+      <div class="card-body">
+        <h5 class="card-title">${trenutniZapis.akcija}, ${trenutniZapis.mjesto}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Bilješka</h6>
+        <p class="card-text">${trenutniZapis.biljeska}</p>
+        <h6 class="card-subtitle mb-2 text-muted">${trenutniZapis.sati} sati</h6>
+        <a href="${trenutniZapis.link}" target="_blank" class="btn btn-dark">Posjetite grupu</a>
+      </div>
+    </div>`
+  }
 
-    zapisivanjeForm = document.getElementById('zapisivanje');
-    imeAkcijeInp = document.getElementById('imeAkcije');
-    biljeskaInp = document.getElementById('biljeska');
-    mjestoInp = document.getElementById('biranjeMjesta');
-    satiInp = document.getElementById('sati');
-    linkInp = document.getElementById('link');
 }
 
-function Zapisi(e){
-  e.preventDefault();
+function Zapisi(e) {
+  e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
 
-    trenutniUser.zapisano.push(new NapraviZapis(imeAkcijeInp.value, biljeskaInp.value, mjestoInp.value, satiInp.value, linkInp.value));
-    let trenutniZapis = trenutniUser.zapisano[trenutniUser.zapisano.length - 1];
+  let imeAkcijeInp = document.getElementById('imeAkcije'); //DOBIVANJE INPUT ELEMENTA ZA IME AKCIJE
+  let biljeskaInp = document.getElementById('biljeska'); //DOBIVANJE INPUT ELEMENTA ZA BILJESKU
+  let mjestoInp = document.getElementById('biranjeMjesta'); //DOBIVANJE INPUT ELEMENTA ZA MJESTO
+  let satiInp = document.getElementById('sati'); //DOBIVANJE INPUT ELEMENTA ZA SATE
+  let linkInp = document.getElementById('link'); //DOBIVANJE INPUT ELEMENTA ZA LINK
 
-    zapisaniEl.innerHTML += `<div class="card" style="width: 18rem; margin: 2px; display: inline-block;">
+  //U NIZ ZAPISANO TRENUTNOG USERA DODAJEMO NOVI OBJEKT KOJI STVARAMO POMOCU KONSTRUKTORSKE FUNCKIJE NapraviZapis
+  trenutniUser.zapisano.push(new NapraviZapis(imeAkcijeInp.value, biljeskaInp.value, mjestoInp.value, satiInp.value, linkInp.value));
+  let trenutniZapis = trenutniUser.zapisano[trenutniUser.zapisano.length - 1]; //STAVLJA TRENUTNI ZAPIS NA OVAJ KOJI SMO NAPRAVILI U PROSLOJ LINIJI KODA
+
+  //DODAJEMO NJEGOVE INFORMACIJE KAKO KARTICU
+  zapisaniEl.innerHTML += `<div class="card zapisnik-card">
     <div class="card-body">
       <h5 class="card-title">${trenutniZapis.akcija}, ${trenutniZapis.mjesto}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Biljeska</h6>
+      <h6 class="card-subtitle mb-2 text-muted">BiljeŠka</h6>
       <p class="card-text">${trenutniZapis.biljeska}</p>
       <h6 class="card-subtitle mb-2 text-muted">${trenutniZapis.sati} sati</h6>
-      <a href="${trenutniZapis.link}" class="card-link link-dark">Posjetite grupu</a>
+      <a href="${trenutniZapis.link}" target="_blank" class="btn btn-dark">Posjetite grupu</a>
     </div>
-    </div>`
+  </div>`
 }
 
-function NapraviZapis(imeAkcije, biljeska, mjesto, sati, link){
-    this.akcija = imeAkcije;
-    this.biljeska = biljeska;
-    this.mjesto = mjesto;
-    this.sati = sati;
-    this.link = link;
+function NapraviZapis(imeAkcije, biljeska, mjesto, sati, link) {
+  this.akcija = imeAkcije;
+  this.biljeska = biljeska;
+  this.mjesto = mjesto;
+  this.sati = sati;
+  this.link = link;
 }

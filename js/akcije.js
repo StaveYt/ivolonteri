@@ -3,6 +3,8 @@ let bottomBoxEl = document.getElementById("bottomBox");
 
 let hiddenBottom = true;
 
+let upaljeniFilteri = [];
+
 function PrikaziDiv() {
   console.log("test");
 
@@ -128,28 +130,29 @@ function Filter(izabraniType) {
   let izabraniCheck = document.getElementById(`${izabraniType}Check`);
 
   if (izabraniCheck.value != "") {
+
     console.log("it's turned off");
     izabraniCheck.value = "";
-
     //OVDJE ĆEMO STAVITI ŠTO SE DESI KADA SE FILTER UGASI
+    upaljeniFilteri.splice(upaljeniFilteri.indexOf(izabraniType), 1);
+    if(upaljeniFilteri.length == 0){container.innerHTML = ""; PageLoad();}
+
   } else {
     console.log("it's turned on");
     izabraniCheck.value = "on";
-
+    container.innerHTML = "";
+    upaljeniFilteri.push(izabraniType)
     //OVDJE STAVI FILTER KOD
-
     for (let i = 0; i < akcije.length; i++) {
       let dodan = false;
-      let trenutniType = akcije[i].mjesto.split(" ");
-      console.log("test");
+      let trenutniType = akcije[i].type.split(" ");
+      
       for (let j = 0; j < trenutniType.length; j++) {
         if(izabraniType == trenutniType[j] && !dodan){
-          DodavanjeKartica(akcije[i].mjesto.split);
+          DodavanjeKartica(akcije[i]);
           dodan = true;
         }
       }
     }
-
-
   }
 }

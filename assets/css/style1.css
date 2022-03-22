@@ -28,6 +28,12 @@ body {
 
 .akcija-card{
   width: 19rem;
-  margin: 3px;
+  height: 618px;
   display: inline-block;
+  overflow: auto;
+  margin-left: 2px; margin-right: 2px;
 }
+
+.akcije-card-btn{
+   
+  }

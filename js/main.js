@@ -86,7 +86,7 @@ let akcija0 = {
   slika: "lanterna.png",
   alt: "Logo Lanterna",
   opis: `Lokalna organizacija s ciljevima unaprijeđenje mentalnog i fizičkog zdravlja, zaštite prava dijece i mladih, razvojem civilnog društva, kulturno umjetničkog amaterizma i promicanjem volonterstva općenito.`,
-  link: "https://volontiranje-lanterna.com/https://volontiranje-lanterna.com/",
+  link: "https://volontiranje-lanterna.com/",
   type: "djeca mladi"
 }; let akcija11 = {
     ime: "Lokalni volonterski centar",
@@ -145,7 +145,7 @@ function DodavanjeKartica(trenutnaAkcija){
         <div class="card-body">
             <h5 class="card-title">${trenutnaAkcija.ime}, ${trenutnaAkcija.mjesto}</h5>
             <p class="card-text">${trenutnaAkcija.opis}</p>
-            <a href="${trenutnaAkcija.link}" class="btn btn-success">Posjetite stranicu akcije</a>
+            <a href="${trenutnaAkcija.link}" class="btn btn-success akcije-card-btn">Posjetite stranicu akcije</a>
         </div>
     </div>`;  
 }

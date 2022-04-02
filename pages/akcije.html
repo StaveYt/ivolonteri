@@ -16,8 +16,8 @@
     </style>
 
 </head>
-<body class="bg-dark" onload="PageLoad()">
-  <!--NAVIGATION-->
+<body class="bg-dark">
+  <!--NAVIGATION BAR-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html">iVolonteri</a>
@@ -26,8 +26,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="zapisnik.html">Zapisnik Sati</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Račun
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="zapisnik.html">Zapisnik Sati</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Log out</a></li>
+            </ul>
           </li>
           <li>
             <a class="nav-link" href="akcije.html">Pregledaj Volonterske Akcije</a>
@@ -56,7 +63,7 @@
       <ul class="dropdown-menu filter" aria-labelledby="filter">
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input filter-check-input" type="checkbox" value="" id="zivotinjeCheck" onclick="Filter('zivotinje')">
+            <input class="form-check-input" type="checkbox" value="" id="zivotinjeCheck" onclick="Filter('zivotinje')">
             <label class="form-check-label" for="zivotinjeCheck">
               Životinje
             </label>
@@ -64,7 +71,7 @@
         </li>
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input" type="checkbox" value="" id="starijiCheck" onclick="Filter('stariji')">
+            <input class="form-check-input" type="checkbox" value="" id="starijiCheck" onclick="Filter('stariji')">
             <label class="form-check-label" for="starijiCheck">
               Stariji
             </label>
@@ -72,7 +79,7 @@
         </li>
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input" type="checkbox" value="" id="beskucniciCheck" onclick="Filter('beskucnici')">
+            <input class="form-check-input" type="checkbox" value="" id="beskucniciCheck" onclick="Filter('beskucnici')">
             <label class="form-check-label" for="beskucniciCheck">
               Beskućnici
             </label>
@@ -80,7 +87,7 @@
         </li>
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input" type="checkbox" value="" id="doniranjeCheck" onclick="Filter('doniranje')">
+            <input class="form-check-input" type="checkbox" value="" id="doniranjeCheck" onclick="Filter('doniranje')">
             <label class="form-check-label" for="doniranjeCheck">
               Doniranje
             </label>
@@ -88,7 +95,7 @@
         </li>
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input" type="checkbox" value="" id="djecaCheck" onclick="Filter('djeca')">
+            <input class="form-check-input" type="checkbox" value="" id="djecaCheck" onclick="Filter('djeca')">
             <label class="form-check-label" for="djecaCheck">
               Djeca
             </label>
@@ -96,7 +103,7 @@
         </li>
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input" type="checkbox" value="" id="edukacijaCheck" onclick="Filter('edukacija')">
+            <input class="form-check-input" type="checkbox" value="" id="edukacijaCheck" onclick="Filter('edukacija')">
             <label class="form-check-label" for="edukacijaCheck">
               Edukacija
             </label>
@@ -104,7 +111,7 @@
         </li>
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input" type="checkbox" value="" id="ekologijaCheck" onclick="Filter('ekologija')">
+            <input class="form-check-input" type="checkbox" value="" id="ekologijaCheck" onclick="Filter('ekologija')">
             <label class="form-check-label" for="ekologijaCheck">
               Ekologija
             </label>
@@ -112,7 +119,7 @@
         </li>
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input" type="checkbox" value="" id="razvojDrustvaCheck" onclick="Filter('razvojDrustva')">
+            <input class="form-check-input" type="checkbox" value="" id="razvojDrustvaCheck" onclick="Filter('razvojDrustva')">
             <label class="form-check-label" for="razvojDrustvaCheck">
               Razvoj Društva
             </label>
@@ -120,7 +127,7 @@
         </li>
         <li>
           <div class="form-check filter-check">
-            <input class="form-check-input filter-check-input" type="checkbox" value="" id="mladiCheck" onclick="Filter('mladi')">
+            <input class="form-check-input" type="checkbox" value="" id="mladiCheck" onclick="Filter('mladi')">
             <label class="form-check-label" for="mladiCheck">
               Mladi
             </label>
@@ -137,6 +144,7 @@
     <div class="bottom-items hidden-bottom-items container" id="bottomBox">
       <div class="row text-center text-white" id="row1">
         <div class="log-in-box">
+          <h2>Ulogirajte se sa administratorskim računom!</h2>
           <form class="log-in text-light" id="log-in" onsubmit="AdminLogIn(event);" style="margin-top: 5px;">
             <div class="form-floating mb-3 text-muted">
               <input type="text" class="form-control" id="username-inp" placeholder="Username">

@@ -1,4 +1,4 @@
-
+/*KLASA ODREĐUJE POZICIJU, MARGINE, VELIČINU BOTUNA I VELIČINU FONTA NA BOTUNA TE TRAJANJE ANIMACIJA*/
 .bottom_button {
     transition: 1s;
     position: fixed;
@@ -11,6 +11,7 @@
     width: 41px;
 }
 
+/*KLASA KOJA ODREĐUJE POZICIJU, MARGINE, KARTICE ZA DODAVANJE AKCIJA I VELIČINU FONTA NA BOTUNA TE TRAJANJE ANIMACIJA */
 .bottom-items{
     transition: 1s;
     position: fixed;
@@ -23,21 +24,23 @@
     overflow: auto;
 }
 
+/*ODREĐUJE POZICIJU BOTUNA PRIJE KLIKA*/
 .hidden-bottom-button{
     bottom: -10px;
 }
 
+/*ODREĐUJE POZICIJU KARTICE ZA DODAVANJE AKCIJA PRIJE KLIKA*/
 .hidden-bottom-items{
     bottom: -50%; 
 }
 
+/*ODREĐUJE MARGINA POJEDINAČNIH CHECKBOXOVA*/
 .filter-check{
     margin: 5px;
-    
 }
 
-
-.filter-check-input{
-    padding: 8px;
+/*POVEĆAVA VELIČINU CHECKBOXA*/
+.filter-check > input{
+    padding: 5px;
     margin: auto;
 }

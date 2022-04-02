@@ -1,8 +1,9 @@
-.text-center{
+
+.text-center {
   text-align: center;
 }
 
-.portrait{
+.portrait {
   width: 360px;
   height: 480px;
   margin-bottom: 5px;
@@ -13,27 +14,32 @@ body {
   height: 100vh;
 }
 
-.main-img{
+.main-img {
   margin: auto;
   opacity: 70%;
 }
 
-
-
-.carousel-text{
+.carousel-text {
   padding-bottom: 40%;
   font-weight: bold;
-  font-family: monospace; 
+  font-family: monospace;
 }
 
-.akcija-card{
+.akcija-card {
   width: 19rem;
-  height: 618px;
+  height: 37rem;
   display: inline-block;
   overflow: auto;
   margin-left: 2px; margin-right: 2px;
 }
 
-.akcije-card-btn{
-   
-  }
+.akcije-card-btn {
+  position: absolute;
+  bottom: 5px;
+}
+
+h1 {
+  font-size: 4em;
+  text-align: center;
+  font-family: "Georgia", serif;
+}

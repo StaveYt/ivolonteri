@@ -13,7 +13,7 @@
   <title>Zapisnik Sati</title>
   <link rel="icon" href="../assets/img/icon.png">
 </head>
-<body class="bg-dark img-bg">
+<body class="bg-dark img-bg" onload="CheckStorage()">
   <!--NAVIGATION BAR-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -23,8 +23,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="zapisnik.html">Zapisnik Sati</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Račun
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="zapisnik.html">Zapisnik Sati</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Log out</a></li>
+            </ul>
           </li>
           <li>
             <a class="nav-link" href="akcije.html">Pregledaj Volonterske Akcije</a>
@@ -43,27 +50,25 @@
   <!--CONTAINER-->
   <div class="container" id="container">
     <div class="row text-center" id="row0">
-    </div>
-    <div class="row text-center text-white" id="row1">
-      <div class="log-in-box">
+      <div class="header">
         <img src="../assets\img\userAvatar.png" alt="To si ti!" class="avatar">
-        <div class="notice">
-          <h3>Ulogirajte se!</h3>
-        </div>
-        <form class="log-in text-light" id="log-in" onsubmit="LogIn(event);" style="margin-top: 5px;">
-          <div class="form-floating mb-3 text-muted">
-            <input type="text" class="form-control" id="username-inp" placeholder="Username">
-            <label for="username" class="form-label">Username</label>
-          </div>
-          <div class="form-floating mb-3 text-muted">
-            <input type="password" class="form-control" id="password-inp" placeholder="Password">
-            <label for="password" class="form-label">Password</label>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <h3 class="topText" id="topText">Ulogirajte se!</h3>
       </div>
     </div>
-    <div class="row" id="row2"></div>
+    <div class="row acc-box text-center text-white" id="row1">
+      <form class="text-light" onsubmit="LogIn();" style="margin-top: 5px;">
+        <div class="form-floating mb-3 text-muted">
+          <input type="text" class="form-control" id="usernameInp" placeholder="Korisničko ime">
+          <label for="username" class="form-label">Korisničko ime</label>
+        </div>
+        <div class="form-floating mb-3 text-muted">
+          <input type="password" class="form-control" id="passwordInp" placeholder="Lozinka">
+          <label for="password" class="form-label">Lozinka</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Potvrdi</button>
+      </form>
+      <button type="button" class="create-acc-btn btn btn-link" id="createAccBtn" onclick="ShowCreateAcc()">Nemate račun? Napravite ga!</button>
+    </div>
   </div>
   <!--JAVASCRIPT-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

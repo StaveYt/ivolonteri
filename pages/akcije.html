@@ -11,12 +11,8 @@
     <!--TITLE & ICON-->
     <title>Lokalne Akcije</title>
     <link rel="icon" href="../assets/img/icon.png">
-    
-    <style>
-    </style>
-
 </head>
-<body class="bg-dark">
+<body class="bg-dark" onload="PageLoad()">
   <!--NAVIGATION BAR-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -26,32 +22,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Račun
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="zapisnik.html">Zapisnik Sati</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Log out</a></li>
-            </ul>
+          <li class="nav-item dropdown" id="accountButton">
+            <a class="nav-link" href="zapisnik.html" role="button">Prijavi se</a>
           </li>
           <li>
             <a class="nav-link" href="akcije.html">Pregledaj Volonterske Akcije</a>
-          </li>
-          <li>
-            <a class="nav-link" href="oNama.html">O nama</a>
-          </li>
         </ul>
-        <form class="d-flex" onsubmit="PretrazivanjeAkcija(searchInp.value, event)">
-          <input class="form-control me-2" id="search" type="search" placeholder="Split" aria-label="Search">
+        <form class="d-flex" onsubmit="SearchActivities(searchInp.value, event)">
+          <input class="form-control me-2" id="searchInp" type="searchInp" placeholder="Split" aria-label="searchInp">
           <button class="btn btn-outline-success" type="submit">Pretraži</button>
         </form>
       </div>
     </div>
   </nav>
   <!--CONTAINER-->
-  <div class="container">
+  <div class="container" id="filter">
     <div class="dropdown" style="margin: 5px;">
       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="filter" data-bs-toggle="dropdown" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
@@ -59,78 +44,59 @@
         </svg>
         Filter
       </a>
-    
       <ul class="dropdown-menu filter" aria-labelledby="filter">
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="zivotinjeCheck" onclick="Filter('zivotinje')">
-            <label class="form-check-label" for="zivotinjeCheck">
-              Životinje
-            </label>
+            <label class="form-check-label" for="zivotinjeCheck">Životinje</label>
           </div>
         </li>
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="starijiCheck" onclick="Filter('stariji')">
-            <label class="form-check-label" for="starijiCheck">
-              Stariji
-            </label>
+            <label class="form-check-label" for="starijiCheck">Stariji</label>
           </div>
         </li>
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="beskucniciCheck" onclick="Filter('beskucnici')">
-            <label class="form-check-label" for="beskucniciCheck">
-              Beskućnici
-            </label>
+            <label class="form-check-label" for="beskucniciCheck">Beskućnici</label>
           </div>
         </li>
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="doniranjeCheck" onclick="Filter('doniranje')">
-            <label class="form-check-label" for="doniranjeCheck">
-              Doniranje
-            </label>
+            <label class="form-check-label" for="doniranjeCheck">Doniranje</label>
           </div>
         </li>
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="djecaCheck" onclick="Filter('djeca')">
-            <label class="form-check-label" for="djecaCheck">
-              Djeca
-            </label>
+            <label class="form-check-label" for="djecaCheck">Djeca</label>
           </div>
         </li>
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="edukacijaCheck" onclick="Filter('edukacija')">
-            <label class="form-check-label" for="edukacijaCheck">
-              Edukacija
-            </label>
+            <label class="form-check-label" for="edukacijaCheck">Edukacija</label>
           </div>
         </li>
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="ekologijaCheck" onclick="Filter('ekologija')">
-            <label class="form-check-label" for="ekologijaCheck">
-              Ekologija
-            </label>
+            <label class="form-check-label" for="ekologijaCheck">Ekologija</label>
           </div>
         </li>
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="razvojDrustvaCheck" onclick="Filter('razvojDrustva')">
-            <label class="form-check-label" for="razvojDrustvaCheck">
-              Razvoj Društva
-            </label>
+            <label class="form-check-label" for="razvojDrustvaCheck">Razvoj Društva</label>
           </div>
         </li>
         <li>
           <div class="form-check filter-check">
             <input class="form-check-input" type="checkbox" value="" id="mladiCheck" onclick="Filter('mladi')">
-            <label class="form-check-label" for="mladiCheck">
-              Mladi
-            </label>
+            <label class="form-check-label" for="mladiCheck">Mladi</label>
           </div>
         </li>
       </ul>
@@ -138,21 +104,21 @@
   </div>
   <div class="container" id="container" >
   </div>
-  <!--BOTUN ZA DODAT AKCIJE-->
+  <!--BOTUN ZA OTVARANJE LOGIN I FORMA-->
   <div class="bottom-container">
-    <div type="button" class="btn btn-outline-danger bottom_button hidden-bottom-button" id="bottomButton" onclick="PrikaziDiv()">+</div>
+    <div type="button" class="btn btn-outline-danger bottom_button hidden-bottom-button" id="bottomButton" onclick="ShowDiv()">+</div>
     <div class="bottom-items hidden-bottom-items container" id="bottomBox">
       <div class="row text-center text-white" id="row1">
         <div class="log-in-box">
           <h2>Ulogirajte se sa administratorskim računom!</h2>
           <form class="log-in text-light" id="log-in" onsubmit="AdminLogIn(event);" style="margin-top: 5px;">
             <div class="form-floating mb-3 text-muted">
-              <input type="text" class="form-control" id="username-inp" placeholder="Username">
-              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="usernameInp" placeholder="Korisničko ime">
+              <label for="username" class="form-label">Korisničko ime</label>
             </div>
             <div class="form-floating mb-3 text-muted">
-              <input type="password" class="form-control" id="password-inp" placeholder="Password">
-              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="passwordInp" placeholder="Lozinka">
+              <label for="password" class="form-label">Lozinka</label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
@@ -162,8 +128,8 @@
   </div>
 
   <!--JAVASCRIPT-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="../js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>  <script type="text/javascript" src="../js/main.js"></script>
   <script type="text/javascript" src="../js/zapisnikSati.js"></script>
   <script type="text/javascript" src="../js/akcije.js"></script>
+</body>
 </html>

@@ -1,3 +1,20 @@
+body {
+  font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  font-size: 4em;
+  font-family: "Georgia", serif;
+}
+
+h2 {
+  font-size: 3em;
+  font-family: "Georgia", serif;
+}
 
 .text-center {
   text-align: center;
@@ -9,37 +26,53 @@
   margin-bottom: 5px;
 }
 
-body {
-  font-family: Helvetica;
-  height: 100vh;
-}
-
 .main-img {
   margin: auto;
   opacity: 70%;
 }
 
 .carousel-text {
-  padding-bottom: 40%;
+  margin-bottom: 5vw;
+  text-align: center;
+  font-size: 25px;
   font-weight: bold;
   font-family: monospace;
 }
 
-.akcija-card {
+.activity-card {
   width: 19rem;
-  height: 37rem;
+  height: 38rem;
   display: inline-block;
   overflow: auto;
   margin-left: 2px; margin-right: 2px;
 }
 
-.akcije-card-btn {
+
+.activity-card-btn {
   position: absolute;
   bottom: 5px;
 }
 
-h1 {
-  font-size: 4em;
-  text-align: center;
-  font-family: "Georgia", serif;
+
+/*POSTAVLJA CUSTOM SCROLLBAR KOJI RADI U NEKIM BROWSERIMA (NPR. CRHOME)*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/*TRAKA*/
+::-webkit-scrollbar-track {
+  background-color: #d7fffc;
+  border-radius: 100vw;
+  margin-block: 5px;
+}
+
+/*P*/
+::-webkit-scrollbar-thumb {
+  background-color: #7a8b8a;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #515c5b;
 }

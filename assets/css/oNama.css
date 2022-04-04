@@ -1,59 +1,57 @@
-/*ODREĐUJE VELIČINU SLIKE U KARTICI TE JOJ DAJE RELATIVNU POZICIJU DA SE NE PREKLAPA S DRUGIM ELEMENTIMA I PRAVILNO SE RASPOREDI PO EKRANU*/
-.image{
+/*GLAVNI DIV ZA KARTICE O NAMA*/
+.bio {
     position: relative;
     margin: 20px;
     width: 28rem;
 }
 
-/*ZAOBLJUJE RUBOVE SLIKE, ODREĐUJE JOJ VELIČINU TAKO DA POPUNI DOSTUPAN PROSTOR*/
-.image-img{
+/*SLIKA U DIVU*/
+.bio-img {
     width: 100%;
     border-radius: 25px;
 }
 
-/*POSTAVLJA ABSOLUTNU POZICIJU U KARTICI DA BI SE OVERLAY PREKLAPAO SA SLLIKOM, POSTAVLJA MAKSIMALNU MOGUĆU ŠIRINU I VISINU U KARTICI, 
- I BOJU FONTA I POSTAVLJA POZICIJU TEKSTA. TAKOĐER ČINI OVERLAY POTPUNO PROZIRNIM PRIJE 
-ANIMACIJE TE POSTAVLJA TRAJANJE ANIMACIJE ZA PROMJENU PROZIRNOSTI TE ZAOBLJUJE RUBOVE ELEMENTA*/
-.image-overlay{
-    position: absolute; /*POSTAVLJA ABSOLUTNU POZICIJU U KARTICI DA BI SE OVERLAY PREKLAPAO SA SLLIKOM*/
+/*DIV S TEKSTOM KOJI PREKRIVA SLIKU I NEVIDLJIV JE PRIJE HOVERA*/
+.bio-overlay {
+    position: absolute; 
     top: 0;
     left: 0;
-    width: 100%; /*POSTAVLJA MAKSIMALNU MOGUĆU ŠIRINU I VISINU U KARTICI*/
-    height: 100%; /*POSTAVLJA MAKSIMALNU MOGUĆU ŠIRINU I VISINU U KARTICI*/
-    background: rgba(0, 0, 0, 0.6); /*DJELOMIČNO PROZIRNA CRNA POZADINNA*/
-    color: #ffffff; /*BOJA FONTA*/
-    /*POSTAVLJA POZICIJU TEKSTA NA DNO KARTICE*/
-    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    display: flex; /*POSTAVLJA POZICIJU TEKSTA NA DNO KARTICE*/
     flex-direction: column; 
     align-items: initial;
     justify-content: end;
-    opacity: 0; /*SKRIVA image-overlay PRIJE ANIMACIJE*/
+    opacity: 0; /*SKRIVA bio-overlay PRIJE ANIMACIJE*/
     transition: opacity 0.25s; /*TRAJANJE ANIMACIJE POJAVLJIVANJA POZADINE*/
-    border-radius: 25px; /*ZAOBLJUJE RUBOVE*/
+    border-radius: 25px; 
 }
 /*POSTAVLJA DULJINU ANIMACIJE POJAVLJIVA*/
-.image-overlay > *{
+.bio-overlay > *{
     transform: translateY(20px);
     transition: transform 0.25s;
 }
 
 /*TIJEKOM HOVERA OVERLAY PRESTAJE BITI PROZIRAN*/
-.image-overlay:hover{
+.bio-overlay:hover {
     opacity: 1;
 }
 
 /*ANIMACIJA ZA PODIZANJE TEKSTA PREMA GORE TIJEKOM HOVERA*/
-.image-overlay:hover > * {
+.bio-overlay:hover > *{
     transform: translateY(0);
 }
 
-.image-title{
-    font-size: 2em;
+/*NASLOV SLIKE*/
+.bio-title {
     font-weight: bold;
     margin-left: 1em;
 }
 
-.image-description{
+/*DESKRIPCIJA SLIKE*/
+.bio-description {
     font-size: 0.9em;
     margin: 1em;
 }

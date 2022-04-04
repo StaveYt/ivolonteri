@@ -3,16 +3,17 @@
     transition: 1s;
     position: fixed;
     bottom: 50%;
-    font-size: large;
+    font-size: medium;
     margin-right: 20px;
     margin-left: 10px;
+    border-bottom: 0;
     border-top-left-radius: 100%;
     border-top-right-radius: 100%;
     width: 41px;
 }
 
 /*KLASA KOJA ODREĐUJE POZICIJU, MARGINE, KARTICE ZA DODAVANJE AKCIJA I VELIČINU FONTA NA BOTUNA TE TRAJANJE ANIMACIJA */
-.bottom-items{
+.bottom-items {
     transition: 1s;
     position: fixed;
     bottom: 0%;
@@ -25,22 +26,22 @@
 }
 
 /*ODREĐUJE POZICIJU BOTUNA PRIJE KLIKA*/
-.hidden-bottom-button{
+.hidden-bottom-button {
     bottom: -10px;
 }
 
 /*ODREĐUJE POZICIJU KARTICE ZA DODAVANJE AKCIJA PRIJE KLIKA*/
-.hidden-bottom-items{
+.hidden-bottom-items {
     bottom: -50%; 
 }
 
 /*ODREĐUJE MARGINA POJEDINAČNIH CHECKBOXOVA*/
-.filter-check{
+.filter-check {
     margin: 5px;
 }
 
 /*POVEĆAVA VELIČINU CHECKBOXA*/
-.filter-check > input{
+.filter-check > input {
     padding: 5px;
     margin: auto;
 }

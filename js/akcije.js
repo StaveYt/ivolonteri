@@ -1,42 +1,37 @@
-let bottomButtonEl = document.getElementById("bottomButton");
-let bottomBoxEl = document.getElementById("bottomBox");
-
-sessionStorage.setItem('ADMINLOGGEDIN','false');
-
 let hiddenBottom = true;
 let activatedFilters = [];
 
 let uploadedImage;
 
+//DOBIVANJE ELEMENATA SA STRANICE
+let bottomButtonEl = document.getElementById("bottomButton");
+let bottomBoxEl = document.getElementById("bottomBox");
+
+//STVARA FUNKICIJU U VARIJABLI toBase64 SA ARGUMENTON file KOJA POSTAJE PROMISE
 const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
+  const reader = new FileReader(); //VARIJABLU reader PRETVARA U FILEREADER
+  reader.readAsDataURL(file); //DOBIVA NAM PATH DO SLIKE
+  reader.onload = () => resolve(reader.result); //DAJE NAM RESULTAT KAO PATH DO SLIKE
+  reader.onerror = error => reject(error); //AKO BUDE ERROR DAJE NAM GA DA GA MOZEMO ISPISATI
 });
 
+//NA UCITAVANJU STRANICE
 function PageLoad(){
-  if(sessionStorage.getItem('OPENEDIT') == 'true'){ ShowDiv(); }
-  ShowAll();
+  AddAll();
 }
 
-function ChechUser(){
-  currentUser = JSON.parse(sessionStorage.getItem('USER'));
-  sessionStorage.setItem('OPENEDIT','false');
+//KOMENTIRANO
+function CheckUser(){
+  currentUser = JSON.parse(sessionStorage.getItem('USER')); //DOBIVA TRENUTNOG KORISNIKA IZ PODATAKA SPREMLJENIH U sessionStorage 
 
+  //PROVJERAVAMO JE LI TRENTUTNI KORISNIK ADMIN I AKO JE ONDA GA ULOGIRAMO DA MOZE DODAVAT AKCIJE
   if (currentUser.rank == 'admin'){
-    let username = currentUser.username;
-    let password = currentUser.password;
-
-      //PREGLEDAVAMO JE LI KORISNIK UNIO TOČNU SIFRU I PASSWORD I AKO JE ONDA MU PRIKAZUJEMO NJEGOV ZAPISNIK
-    if (username = currentUser.username && password == currentUser.password){
-      loggedIn = true;
-      ShowActivityEdit();
-    }
+    loggedIn = true;
+    ShowActivityEdit();
   }
 }
 
-//PODIŽE DIV ZA DODAVANJE AKCIJA I MIJENJA TEKST BOUTUNA IS PLUSA U MINUS
+//PODIŽE DIV ZA DODAVANJE AKCIJA I MIJENJA TEKST BOUTUNA IS PLUSA U MINUS I PROVJERAVA IMA LI ULOGIRANOG KORISNIKA
 function ShowDiv(){
 
   bottomButtonEl.classList.toggle('hidden-bottom-button');
@@ -48,22 +43,24 @@ function ShowDiv(){
     hiddenBottom = true;
   }
   bottomBoxEl.classList.toggle('hidden-bottom-items');
-  if (JSON.parse(sessionStorage.getItem('USER')) != null){ ChechUser(); }
+  if (JSON.parse(sessionStorage.getItem('USER')) != null){ CheckUser(); }
 }
 
-function AdminLogIn(){
+//KOMENTIRANO
+function AdminLogIn(e){
+  e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
+  //DOBIVAMO INFORMACIJE KOJE JE KORISNIK UNIO
   let username = document.getElementById('usernameInp').value;
   let password = document.getElementById('passwordInp').value;
 
   for (let i = 0; i < users.length; i++){
-    //PREGLEDAVAMO JE LI KORISNIK UNIO TOČNU SIFRU I PASSWORD I AKO JE ONDA MU PRIKAZUJEMO NJEGOV ZAPISNIK I STAVLJAMO GA KAO TRENUTNI USER
+    //PREGLEDAVAMO JE LI KORISNIK UNIO TOCNO KORISNICKO IME I SIFRU I AKO JE ADMIN ONDA MU POKAZEMO FORM ZA DODAVAT AKCIJE
     if (username == users[i].username && password == users[i].password){
-      if (users[i].rank == "admin") {
+      if (users[i].rank == 'admin') {
         loggedIn = true;
         currentUser = users[i]; 
         
-        sessionStorage.setItem("USER",JSON.stringify(currentUser)); //NIZ NOVO DODANIH ZIVOTINJA SE PRETVARA U STRING I SPREMA U sessionSTORAGE
-        sessionStorage.setItem('OPENEDIT','true');    
+        sessionStorage.setItem('USER',JSON.stringify(currentUser)); //U sessionStorage SPREMA SE ULOGIRANI KORISNIK
         ShowActivityEdit();
       }
     }
@@ -75,6 +72,7 @@ function AdminLogIn(){
   }
 }
 
+//KOMENTIRANO
 function ShowActivityEdit(){
   bottomBoxEl.innerHTML = `<div class="row text-center text-white">
     <h2 class="username" id="username">${currentUser.username}</h2>
@@ -109,81 +107,90 @@ function ShowActivityEdit(){
   </div>`;
 }
 
+//KOMENTIRANO
 function AddActivity(e) {
-  e.preventDefault();
+  e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
 
+  //DOBIVANJE UNESENIH INFORMACIJA
   let name = document.getElementById('nameInp').value; 
   let discription = document.getElementById('discriptionInp').value;
   let place = document.getElementById('placeInp').value;
   let imageFile = uploadedImage;
   let link = document.getElementById('linkInp').value;
 
+  //DODAVANJE NOVODODANE AKCIJE U NIZ activities IONDA SPREMAMO PROMJENE U NIZU U localStorage I ZATI
   activities.push(new CreateActivity(name, discription, place, link, imageFile));
   localStorage.setItem('ACTIVITIES',JSON.stringify(activities));
   AddActivityCard(activities[activities.length - 1]);
 }
 
-function Filter(chosenType){
-  let chosenChecks = document.getElementById(`${chosenType}Check`);
+//KOMENTIRANO
+function Filter(chosenTag){
+  let chosenChecks = document.getElementById(`${chosenTag}Check`); //DOBIVAMO ELEMENT FILTERA KOJEG JE KORISNIK UKLJUCIO
 
-  if (chosenChecks.value != "") {
-    chosenChecks.value = "";
+  //PROVJERAVAMO JE LI KORISNIK UPALIO ILI UGASIO FILTER
+  if (chosenChecks.value != '') { //FILTER KORISNIK JE UGASIO FILTER
+    chosenChecks.value = '';
 
-    activatedFilters.splice(activatedFilters.indexOf(chosenType), 1);
+    activatedFilters.splice(activatedFilters.indexOf(chosenTag), 1);//BRISEMO FILTER IZ NIZA activatedFilters
 
+    //AKO JE OVO BIO ZADNJI UPALJENI FILTER ONDA SE DODAJU NAZAD SVE KARTICE, AKO NIJE ONDA SAMO BRISEMO KARTICE SA TIM TIPOM
     if (activatedFilters.length == 0){
-      container.innerHTML = "";
-      ShowAll();
-    } else{ DeleteExcess(chosenType); }
+      container.innerHTML = '';
+      AddAll();
+    } 
+    else{ DeleteExcess(chosenTag); }
 
-  } else{
-    chosenChecks.value = "on";
+  } else{ //KORISNIK JE UPALIO FILTER
+    chosenChecks.value = 'on';
 
-    if (activatedFilters.length == 0){ container.innerHTML = ""; }
-    activatedFilters.push(chosenType);
+    if (activatedFilters.length == 0){ container.innerHTML = ''; } //AKO JE OVO PRVI UPALJENI FILTER ONDA CISTIMO CONTAINER
+    activatedFilters.push(chosenTag);
 
     for (let i = 0; i < activities.length; i++) {
       let dodan = false;
-      let trenutniType = activities[i].type.split(" ");
+      let currentTag = activities[i].tag;
 
-      for (let j = 0; j < trenutniType.length; j++) {
-        if (chosenType == trenutniType[j] && !dodan) {
-          AddActivityCard(activities[i]);
-          dodan = true;
-        }
+      //AKO TAGOVI AKCIJE SADRZE TAG FILTERA ONDA DODAJEMO KARTICU TE AKCIJE
+      if(currentTag.includes(chosenTag) && !dodan){
+        AddActivityCard(activities[i]);
+        dodan = true;
       }
     }
-
   }
 }
 
-function DeleteExcess(chosenType){
+//KOMENTIRANO
+function DeleteExcess(chosenTag){
+  //PREGLEDAVAMO KROZ NIZ activities DOK NE NADEMO AKCIJU KOJA SADRZI chosenTag IONDA MOZEMO MAKNITI NJEZINU KARTICU
   for (let i = 0; i < activities.length; i++) {
-    if (activities[i].type.includes(chosenType)) {
+    if (activities[i].tag.includes(chosenTag)) {
       let activityCard = document.getElementById(activities[i].name);
       container.removeChild(activityCard);
     }
   }
 }
 
+//KOMENTIRANO
 function FileUpload() {
-  let uploadedFile = document.getElementById('imageFile').files[0];
-  console.log("on file upload");
+  let uploadedFile = document.getElementById('imageFile').files[0]; //DOBIVAMO PRENESENU SLIKU
 
-  if(uploadedFile.size<=3000000){
-      toBase64(uploadedFile)
-      .then(res => {
-          uploadedImage = res;
+  //PROVJERAVAMO JE LI PRENESENA SLIKA MANJA OD LIMITA IONDA  I STAVLJAMO GA U VARIJABLU uploadedImage
+  if(uploadedFile.size < 3000001){
+      toBase64(uploadedFile) //VRTIMO FUNKCIJU toBase64() IZ KOJE DOBIVAMO LINK DO PRENESENE SLIKE
+      .then(res => { 
+          uploadedImage = res; //STAVLJAMO uploadedImage KAO PATH DO SLIKE
       })
       .catch(err => {
-          console.log(err);
+          console.log(err); //AKO IMA GRESKA ISPISUJEMO JU U KONZOLU
       })
   }
   else{
-      alert("Slika pre velika, mora biti manja od 3mb");
+      alert("Slika pre velika, mora biti manja od 3mb"); //AKO JE SLIKA PREVELIKA ONDA ALERTAMO KORISNIKA
   }
 } 
 
+//KONSTRUKTORSKA FUNKCIJA
 function CreateActivity(name, discription, place, link, image){
   this.name = name;
   this.discription = discription;

@@ -1,0 +1,82 @@
+h1 {
+  font-size: 4em;
+  font-family: "Georgia", serif;
+}
+  
+h2 {
+  font-size: 3em;
+  font-family: "Georgia", serif;
+}
+
+.main-img {
+  margin: auto;
+  opacity: 70%;
+}
+
+
+/*TEKST NA SLIKAMA U CAROUSELU*/
+.carousel-text {
+  margin-bottom: 5vw;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+/*GLAVNI DIV ZA KARTICE O NAMA*/
+.bio {
+  position: relative;
+  margin: 20px;
+  width: 28rem;
+}
+
+/*SLIKA U DIVU*/
+.bio-img {
+  width: 100%;
+  border-radius: 25px;
+}
+
+/*DIV S TEKSTOM KOJI PREKRIVA SLIKU I NEVIDLJIV JE PRIJE HOVERA*/
+.bio-overlay {
+  display: flex;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  flex-direction: column; 
+  align-items: initial;
+  justify-content: end;
+  opacity: 0; /*SKRIVA bio-overlay PRIJE ANIMACIJE*/
+  transition: opacity 0.25s; /*TRAJANJE ANIMACIJE POJAVLJIVANJA POZADINE*/
+  border-radius: 25px; 
+}
+/*POSTAVLJA DULJINU ANIMACIJE POJAVLJIVA*/
+.bio-overlay > *{
+  transform: translateY(20px);
+  transition: transform 0.25s;
+}
+
+/*TIJEKOM HOVERA OVERLAY PRESTAJE BITI PROZIRAN*/
+.bio-overlay:hover {
+  opacity: 1;
+}
+
+/*ANIMACIJA ZA PODIZANJE TEKSTA PREMA GORE TIJEKOM HOVERA*/
+.bio-overlay:hover > *{
+  transform: translateY(0);
+}
+
+/*NASLOV SLIKE*/
+.bio-title {
+  font-weight: bold;
+  margin-left: 1em;
+}
+
+/*DESKRIPCIJA SLIKE*/
+.bio-description {
+  font-size: 0.9em;
+  margin: 1em;
+}

@@ -1,81 +1,88 @@
 /*POTAVLJA POZADINU DA PREKRIVA ZASLON I NE PONAVLJA SE */
 body {
-    background-image: url('../img/loginBackround.jpg');
-    background-size: cover;
-    background-blend-mode: overlay;
-    background-repeat: no-repeat;
+	background-image: url('../img/loginBackround.jpg');
+	background-size: cover;
+	background-blend-mode: overlay;
+	background-repeat: no-repeat;
 }
 
 h1 {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
-.acc-box {
-    width: 420px;
-    margin: auto;
-}
-
-.header {
-    color: #fff;
-    margin: auto;
-    margin-top: 10%;
-    width: 420px;
-}
-
+/*VELICINA I MARGINE AVATARA KORISNIKA POVIŠE LOGIN BOXA*/
 .avatar {
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    margin-bottom: 5px;
-
+	width: 100px;
+	height: 100px;
+	margin: auto;
+	margin-bottom: 5px;
 }
 
-.topText {
-    padding: 5px;
-    background-color:  rgb(16, 167, 141);
-    font-family: monospace;
-    border-radius: 50px;
-    text-align: center;
+/*MARGINE, BOJA I SIRINA DIVA KOJI SADRZI TEKST POVISE FORMA ZA ULOGIRANJE*/
+.header-box {
+	color: #fff;
+	margin: auto;
+	margin-top: 10%;
+	width: 420px;
 }
 
-.zapisnik-card {
-    width: 18rem;
-    height: 15rem;
-    margin: 1.5px;
-    overflow: auto;
-    display: inline-block;
+/*DIZAJN TEXTA KOJI SE NALAZI U header-box-U*/
+.top-text {
+	padding: 5px;
+	background-color:  #10a78d;
+	font-family: monospace;
+	border-radius: 50px;
+	text-align: center;
 }
 
-.card-remove {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+/*SIRINA I MARGINA DIVA KOJI SADRZI FORM ZA ULOGIRANJE*/
+.acc-box {
+	width: 420px;
+	margin: auto;
 }
 
-.card-link {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-}
-
+/*BOJA I MARGINE BOTUNA ZA STVARANJE NOVIH ACCOUNTA*/
 .create-acc-btn {
-    margin: 5px;
-    color: white;
-    transition: 0.5s;
+	margin: 5px;
+	color: #ffffff;
+	transition: 0.5s;
 }
-  
 .create-acc-btn:hover {
-    color: rgb(199, 199, 199);
+	color: #c7c7c7;
 }
 
+/*DIZAJN KARTICE KOJA SADRZI ZAPIS SATI*/
+.record-card {
+	width: 18rem;
+	height: 15rem;
+	margin: 1.5px;
+	overflow: auto;
+	display: inline-block;
+}
+
+/*POZICIJA BOTUNA ZA BRISANJE KARTICA*/
+.card-remove {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+/*POZICIJA BOUTUNA ZA POSJETIT STRANICU AKCIJE NA DNO KARTICE ZAPISA SATI*/
+.card-link {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+
+/*DIZAJN TEKSTA KOJI SE PRIKAZUJE AKO NEMA NIJEDNOG ZAPISA*/
 .filler-text {
-    margin: auto;
-    margin-right: 10%;
-    text-align: center;
-    border: 5px solid gray;
-    border-radius: 10px;
+	margin: auto;
+	margin-right: 10%;
+	text-align: center;
+	border: 5px solid #808080;
+	border-radius: 10px;
 }
 
-.edit-activities-btn {
-    display: inline-block;
+.admin-panel-btn {
+	display: inline-block;
 }

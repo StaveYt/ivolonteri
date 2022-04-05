@@ -48,9 +48,8 @@ let admin0 = {
   records: [],
 };
 
-//NIZ U KOJIMA STOJE SVI KORISNICI I PROVJERAVA SE JE LI VEC SPREMLJENA, AKO JE ONDA SE POSTAVLJA NA TAJ POHRANJENI NIZ
-let users;
-// localStorage.setItem('USERS',null);
+//NIZ GDJE AKO PODATAK USERS U localStorageu NIJE PRAZAN SE STAVLJAJU SVI SPREMLJENI KORISNICI
+let users = [];
 if (JSON.parse(localStorage.getItem('USERS')) != null){ users = JSON.parse(localStorage.getItem('USERS')); }
 else{ users = [user0, admin0]; }
 
@@ -116,7 +115,7 @@ function ShowCreateAcc(){
     </div>
     <div class="form-floating mb-3 text-muted">
       <input type="password" class="form-control" id="passwordInp" placeholder="Lozinka">
-      <label for="password" class="form-label">password</label>
+      <label for="password" class="form-label">Lozinka</label>
     </div>
     <div class="form-floating mb-3 text-muted">
       <input type="password" class="form-control" id="confirmPasswordInp" placeholder="Potvrdite Lozinku">
@@ -130,23 +129,36 @@ function ShowCreateAcc(){
 function CreateAcc(e){
   e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
 
+  let tested = false;
+  
   //DOBIVANJE INFORMACIJA KOJE JE KORISNIK UNIO
   let username = document.getElementById("usernameInp").value;
   let email = document.getElementById("emailInp").value;
   let password = document.getElementById("passwordInp").value;
   let confirmPassword = document.getElementById("confirmPasswordInp").value;
 
-  //PROVJERAVAMO JE LI KORISNIK UNIO SVE TOCNO I AKO NIJE OBAVJESTIMO GA
+  //PROVJERAVAMO JE LI KORISNIK UNIO SVE TOCNO I JE LI KORISNICKO IME SLOBODNO I AKO NIJE OBAVJESTIMO GA
   if (password.length < 8){ alert("Šifra mora sadržavati barem 8 znakova, slova ili brojeva!"); }
   else if (password != confirmPassword){ alert("Šifre se ne podudaraju!"); }
+  else if (username == ''){ alert("Molim Vas upišite korisničko ime!"); }
   else{
-    //U NIZ users NAPRA
-    users.push(new CreateUser(username, password, email));
-    localStorage.setItem('USERS',JSON.stringify(users));
-    currentUser = users[users.length - 1];
-    ShowRecordKeeper();
-  }
+    for(let i = 0; i < users.length; i++){ 
+      if(username == users[i].username){
+        alert('To ime se vec koristi!'); 
+        tested = true; 
+        break;
+      } 
+    }
 
+    if(!tested){
+      users.push(new CreateUser(username, password, email));
+      localStorage.setItem('USERS', JSON.stringify(users));
+      currentUser = users[users.length - 1];
+      sessionStorage.setItem('USER', JSON.stringify(currentUser));
+
+      location.reload();
+    }
+  }
 }
 
 //KOMENTIRANO
@@ -202,7 +214,7 @@ function ShowRecordKeeper(){
   let formEl = document.getElementById('form');
 
   //AKO SE ULOGIRAO ADMIN DODAJEMO U HTML FORMA BOTUN ZA ICI NA ADMIN PANEL
-  if (currentUser.rank == 'admin'){ formEl.innerHTML += `<a class="btn btn-success edit-activities-btn" href="adminPanel.html">Admin Panel</a>`; }
+  if (currentUser.rank == 'admin'){ formEl.innerHTML += `<a class="btn btn-success admin-panel-btn" href="adminPanel.html">Admin Panel</a>`; }
 
   //PREGLEDAVAMO JE LI BROJ ZAPISA KOJI KORISNIK IMA JEDNAK NULI, AKO JE DODAJEMO TEKST
   if (currentUser.records.length == 0){
@@ -211,7 +223,7 @@ function ShowRecordKeeper(){
     </div>`;
   } else{
     for (let i = 0; i < currentUser.records.length; i++){
-      let currentRecord = currentUser.records[i]; //STVARAMO VARIJABLU KOJA SADRZI TRENUTNI ZAPIS KOJI JE JEDNAK OBJEKTU SA INDEXOM i U NIZU records TRENUTNOG KORISNIKA
+      let currentRecord = currentUser.records[i]; //STVARAMO VARIJABLU KOJA SADRZI TRENUTNI ZAPIS KOJI DOBIVAMO IZ NIZA records TRENUTNOG KORISNIKA
       AddCard(currentRecord);
     }
   }
@@ -228,12 +240,18 @@ function TakeRecord(e){
   let hours = document.getElementById("hours").value; 
   let link = document.getElementById("link").value;
 
-  //U records TRENUTNOG USERA DODAJEMO NOVI OBJEKT KOJI STVARAMO IONDA SPREMAMO USERA U sessionStorage
-  currentUser.records.push(new CreateRecord(activity, note, place, hours, link));
-  sessionStorage.setItem("USER",JSON.stringify(currentUser));
-  let currentRecord = currentUser.records[currentUser.records.length - 1];
-  
-  AddCard(currentRecord);
+  //PROVJERAVAMO DA KORISNIK NIJE UPISAO PRAZNO IME, AKO NIJE PRAZNO ONDA SE DODAJEW ZAPIS, AKO JE PRAZNO OBAVJESTIMO KORISNIKA
+  if (activity != ""){
+    //U records TRENUTNOG USERA DODAJEMO NOVI OBJEKT KOJI STVARAMO IONDA SPREMAMO USERA U sessionStorage
+    currentUser.records.push(new CreateRecord(activity, note, place, hours, link));
+    sessionStorage.setItem("USER",JSON.stringify(currentUser));
+    let currentRecord = currentUser.records[currentUser.records.length - 1];
+    
+    if(currentUser.records.length == 1){location.reload();} //AKO JE OVO PRVI ZAPIS ONDA SE STRANICA REFRESHA KAKO BI SE MAKAO TEMPORARY TEKST
+
+    AddCard(currentRecord);
+  }
+  else{alert("Ime nemože biti prazno!")}
 }
 
 //KOMENTIRANO
@@ -249,10 +267,11 @@ function CardRemove(activityName){
       sessionStorage.setItem("USER",JSON.stringify(currentUser));
     }
   }
+  if(currentUser.records.length == 0){location.reload()}
 }
 //KOMENTIRANO
 function AddCard(currentRecord){
-  recordKeeperEl.innerHTML += `<div class="card zapisnik-card" id="${currentRecord.activity}">
+  recordKeeperEl.innerHTML += `<div class="card record-card" id="${currentRecord.activity}">
     <div class="card-body">
       <div class="card-title">
         <h5 style="display: inline-block;">${currentRecord.activity}, ${currentRecord.place}</h5>

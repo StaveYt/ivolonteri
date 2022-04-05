@@ -4,57 +4,34 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
+  /*POSTAVLJA CUSTOM SCROLLBAR ZA FIREFOX*/
+  scrollbar-width: thin; /*VELICINA SCROLLBARA*/
+  scrollbar-color: #d7fffc #7a8b8a; /*SCROLLBAR TRAKA I THUMB BOJA*/ 
 }
 
-h1 {
-  font-size: 4em;
-  font-family: "Georgia", serif;
-}
-
-h2 {
-  font-size: 3em;
-  font-family: "Georgia", serif;
+hr{
+  color: #ffffff;
 }
 
 .text-center {
   text-align: center;
 }
 
-.portrait {
-  width: 360px;
-  height: 480px;
-  margin-bottom: 5px;
-}
-
-.main-img {
-  margin: auto;
-  opacity: 70%;
-}
-
-.carousel-text {
-  margin-bottom: 5vw;
-  text-align: center;
-  font-size: 25px;
-  font-weight: bold;
-  font-family: monospace;
-}
-
+/*DIZAJN KARTICE ZA VOLONTERSKE AKCIJE*/
 .activity-card {
   width: 19rem;
   height: 38rem;
   display: inline-block;
   overflow: auto;
-  margin-left: 2px; margin-right: 2px;
+  margin-inline: 2px;
 }
-
-
+/*POZICIJA BOTUNA ZA POSJEČIVANJE STRANICE VOLONTERSKE AKCIJE*/
 .activity-card-btn {
   position: absolute;
   bottom: 5px;
 }
 
-
-/*POSTAVLJA CUSTOM SCROLLBAR KOJI RADI U NEKIM BROWSERIMA (NPR. CRHOME)*/
+/*POSTAVLJA CUSTOM SCROLLBAR ZA BROWSERE KAO CHROME, SAFARI, EDGE*/
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -66,10 +43,10 @@ h2 {
   margin-block: 5px;
 }
 
-/*P*/
+/*THUMB*/
 ::-webkit-scrollbar-thumb {
   background-color: #7a8b8a;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.302);
   border-radius: 100vw;
 }
 

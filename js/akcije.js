@@ -15,12 +15,30 @@ const toBase64 = file => new Promise((resolve, reject) => {
   reader.onerror = error => reject(error); //AKO BUDE ERROR DAJE NAM GA DA GA MOZEMO ISPISATI
 });
 
-//NA UCITAVANJU STRANICE
 function PageLoad(){
-  AddAll();
+  AddAllActivities();
 }
 
-//KOMENTIRANO
+//ZOVE SE KADA SE KLIKNE CRVENI BOTUN NA akcije.html
+function ShowDiv(){
+
+  //AKTIVIRAMO ILI DEAKTIVIRAMO KLASE OVISNO JE LI KORISNIK HTIO SAKRITI ILI PRIKAZATI DIV
+  bottomButtonEl.classList.toggle('hidden-bottom-button');
+  bottomBoxEl.classList.toggle('hidden-bottom-items');
+
+  //OVISNO JE LI DIV PRIKAZAN ILI NE MIJENJA TEKST BOTUNA NA - ILI +
+  if (hiddenBottom){
+    bottomButtonEl.innerText = '-';
+    hiddenBottom = false;
+  } else{
+    bottomButtonEl.innerText = '+';
+    hiddenBottom = true;
+  }
+  
+  //AKO IMA ULOGIRANOG KORISNIKA PROVJERAVAMO KOJI JE RANK
+  if (JSON.parse(sessionStorage.getItem('USER')) != null){ CheckUser(); }
+}
+
 function CheckUser(){
   currentUser = JSON.parse(sessionStorage.getItem('USER')); //DOBIVA TRENUTNOG KORISNIKA IZ PODATAKA SPREMLJENIH U sessionStorage 
 
@@ -31,22 +49,7 @@ function CheckUser(){
   }
 }
 
-//PODIŽE DIV ZA DODAVANJE AKCIJA I MIJENJA TEKST BOUTUNA IS PLUSA U MINUS I PROVJERAVA IMA LI ULOGIRANOG KORISNIKA
-function ShowDiv(){
-
-  bottomButtonEl.classList.toggle('hidden-bottom-button');
-  if (hiddenBottom){
-    bottomButtonEl.innerText = '-';
-    hiddenBottom = false;
-  } else{
-    bottomButtonEl.innerText = '+';
-    hiddenBottom = true;
-  }
-  bottomBoxEl.classList.toggle('hidden-bottom-items');
-  if (JSON.parse(sessionStorage.getItem('USER')) != null){ CheckUser(); }
-}
-
-//KOMENTIRANO
+//ZOVE SE NA SUBMITU FORMA ZA PRIJAVU NA akcije.html
 function AdminLogIn(e){
   e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
   //DOBIVAMO INFORMACIJE KOJE JE KORISNIK UNIO
@@ -61,7 +64,54 @@ function AdminLogIn(e){
         currentUser = users[i]; 
         
         sessionStorage.setItem('USER',JSON.stringify(currentUser)); //U sessionStorage SPREMA SE ULOGIRANI KORISNIK
-        ShowActivityEdit();
+        bottomBoxEl.innerHTML = `
+          <div class="row text-center text-white">
+            <h2 class="username" id="username">${currentUser.username}</h2>
+          </div>
+          <div class="row">
+            <div>
+              <form class="text-white" onsubmit="AddActivity(event)">
+                <legend>Dodaj Akciju</legend>
+                <div class="mb-3">
+                  <label for="nameInp" class="form-label">Upišite ime akcije</label>
+                  <input type="text" id="nameInp" class="form-control" placeholder="Crveni Križ">
+                </div>
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Dodajte Sliku</label>
+                  <input class="form-control" type="file" id="imageFile" onchange="FileUpload()">
+                </div>
+                <div class="mb-3">
+                  <label for="discriptionInp" class="form-label">Opis</label>
+                  <textarea class="form-control" id="discriptionInp" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="placeInp" class="form-label">Upišite grad (ako je više odvajate ih zarezom)</label>
+                <input type="text" id="placeInp" class="form-control" placeholder="Split, Šolta">
+                </div>
+                <div class="mb-3">
+                  <label for="linkInp" class="form-label">Upišite link</label>
+                  <input type="text" id="linkInp" class="form-control" placeholder="https://bit.ly/Ur3um">
+                </div>
+                <div class="mb-3">
+                  <label for="tagInp" class="form-label">Odaberite tagove akcije</label>
+                  <select class="form-select" id="tagInp" aria-label="Default select example">
+                    <option selected disabled>Izaberite tag</option>
+                    <option value="zivotinje">Životinje</option>
+                    <option value="stariji">Stariji</option>
+                    <option value="beskucnici">Beskućnici</option>
+                    <option value="doniranje">Doniranje</option>
+                    <option value="djeca">Djeca</option>
+                    <option value="edukacija">Edukacija</option>
+                    <option value="ekologija">Ekologija</option>
+                    <option value="razvojDrustva">Razoj Društva</option>
+                    <option value="mladi">Mladi</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        `;
       }
     }
   }
@@ -72,42 +122,24 @@ function AdminLogIn(e){
   }
 }
 
-//KOMENTIRANO
-function ShowActivityEdit(){
-  bottomBoxEl.innerHTML = `<div class="row text-center text-white">
-    <h2 class="username" id="username">${currentUser.username}</h2>
-    </div>
-    <div class="row">
-    <div>
-      <form class="text-white" onsubmit="return AddActivity(event)">
-        <legend>Dodaj Akciju</legend>
-        <div class="mb-3">
-          <label for="nameInp" class="form-label">Upišite ime akcije</label>
-          <input type="text" id="nameInp" class="form-control" placeholder="Crveni Križ">
-        </div>
-        <div class="mb-3">
-          <label for="formFile" class="form-label">Dodajte Sliku</label>
-          <input class="form-control" type="file" id="imageFile" onchange="FileUpload()">
-        </div>
-        <div class="mb-3">
-          <label for="discriptionInp" class="form-label">Opis</label>
-          <textarea class="form-control" id="discriptionInp" rows="3"></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="placeInp" class="form-label">Upišite grad (ako je više odvajate ih zarezom)</label>
-          <input type="text" id="placeInp" class="form-control" placeholder="Split, Šolta">
-        </div>
-        <div class="mb-3">
-          <label for="linkInp" class="form-label">Upišite link</label>
-          <input type="text" id="linkInp" class="form-control" placeholder="https://bit.ly/Ur3um">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-  </div>`;
-}
+function FileUpload() {
+  let uploadedFile = document.getElementById('imageFile').files[0]; //DOBIVAMO PRENESENU SLIKU
 
-//KOMENTIRANO
+  //PROVJERAVAMO JE LI PRENESENA SLIKA MANJA OD LIMITA IONDA  I STAVLJAMO GA U VARIJABLU uploadedImage
+  if(uploadedFile.size < 3000001){
+      toBase64(uploadedFile) //VRTIMO FUNKCIJU toBase64() IZ KOJE DOBIVAMO LINK DO PRENESENE SLIKE
+      .then(res => { 
+          uploadedImage = res; //STAVLJAMO uploadedImage KAO PATH DO SLIKE
+      })
+      .catch(err => {
+          console.log(err); //AKO IMA GRESKA ISPISUJEMO JU U KONZOLU
+      })
+  } else{
+      alert("Slika pre velika, mora biti manja od 3mb"); //AKO JE SLIKA PREVELIKA ONDA ALERTAMO KORISNIKA
+  }
+} 
+
+//ZOVE SE NA SUBMITU FORMA ZA DODAT AKCIJU 
 function AddActivity(e) {
   e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
 
@@ -116,15 +148,16 @@ function AddActivity(e) {
   let discription = document.getElementById('discriptionInp').value;
   let place = document.getElementById('placeInp').value;
   let imageFile = uploadedImage;
+  let tag = document.getElementById('tagInp').value;
   let link = document.getElementById('linkInp').value;
 
   //DODAVANJE NOVODODANE AKCIJE U NIZ activities IONDA SPREMAMO PROMJENE U NIZU U localStorage I ZATI
-  activities.push(new CreateActivity(name, discription, place, link, imageFile));
+  activities.push(new CreateActivity(name, discription, place, link, imageFile, tag));
   localStorage.setItem('ACTIVITIES',JSON.stringify(activities));
   AddActivityCard(activities[activities.length - 1]);
 }
 
-//KOMENTIRANO
+//ZOVE SE KADA KORISNIK AKTIVIRA/DEAKTIVIRA FILTER
 function Filter(chosenTag){
   let chosenChecks = document.getElementById(`${chosenTag}Check`); //DOBIVAMO ELEMENT FILTERA KOJEG JE KORISNIK UKLJUCIO
 
@@ -160,7 +193,6 @@ function Filter(chosenTag){
   }
 }
 
-//KOMENTIRANO
 function DeleteExcess(chosenTag){
   //PREGLEDAVAMO KROZ NIZ activities DOK NE NADEMO AKCIJU KOJA SADRZI chosenTag IONDA MOZEMO MAKNITI NJEZINU KARTICU
   for (let i = 0; i < activities.length; i++) {
@@ -171,31 +203,13 @@ function DeleteExcess(chosenTag){
   }
 }
 
-//KOMENTIRANO
-function FileUpload() {
-  let uploadedFile = document.getElementById('imageFile').files[0]; //DOBIVAMO PRENESENU SLIKU
-
-  //PROVJERAVAMO JE LI PRENESENA SLIKA MANJA OD LIMITA IONDA  I STAVLJAMO GA U VARIJABLU uploadedImage
-  if(uploadedFile.size < 3000001){
-      toBase64(uploadedFile) //VRTIMO FUNKCIJU toBase64() IZ KOJE DOBIVAMO LINK DO PRENESENE SLIKE
-      .then(res => { 
-          uploadedImage = res; //STAVLJAMO uploadedImage KAO PATH DO SLIKE
-      })
-      .catch(err => {
-          console.log(err); //AKO IMA GRESKA ISPISUJEMO JU U KONZOLU
-      })
-  }
-  else{
-      alert("Slika pre velika, mora biti manja od 3mb"); //AKO JE SLIKA PREVELIKA ONDA ALERTAMO KORISNIKA
-  }
-} 
-
 //KONSTRUKTORSKA FUNKCIJA
-function CreateActivity(name, discription, place, link, image){
+function CreateActivity(name, discription, place, link, image, tag){
   this.name = name;
   this.discription = discription;
   this.place = place;
   this.link = link;
-  this.alt = "";
+  this.alt = name;
   this.image = image;
+  this.tag = tag;
 }

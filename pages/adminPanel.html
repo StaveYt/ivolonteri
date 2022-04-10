@@ -21,7 +21,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html">iVolonteri</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -43,7 +43,7 @@
 		<div class="row">
 			<div class="col" id="col0">
 				<div class="row" id="row00">
-					<form class="text-white" onsubmit="return AddActivity(event)">
+					<form class="text-white" onsubmit="AddActivity(event)">
 						<legend>Dodaj Akciju</legend>
 						<div class="mb-3">
 							<label for="nameInp" class="form-label">Upišite ime akcije</label>
@@ -64,6 +64,21 @@
 						<div class="mb-3">
 							<label for="linkInp" class="form-label">Upišite link</label>
 							<input type="text" id="linkInp" class="form-control" placeholder="https://bit.ly/Ur3um">
+						</div>
+            <div class="mb-3">
+							<label for="tagInp" class="form-label">Odaberite tagove akcije</label>
+              <select class="form-select" id="tagInp" aria-label="Default select example">
+                <option selected disabled>Izaberite tag</option>
+                <option value="zivotinje">Životinje</option>
+                <option value="stariji">Stariji</option>
+                <option value="beskucnici">Beskućnici</option>
+                <option value="doniranje">Doniranje</option>
+                <option value="djeca">Djeca</option>
+                <option value="edukacija">Edukacija</option>
+                <option value="ekologija">Ekologija</option>
+                <option value="razvojDrustva">Razoj Društva</option>
+                <option value="mladi">Mladi</option>
+              </select>
 						</div>
 						<button type="submit" class="btn btn-primary">Dodaj</button>
 					</form>

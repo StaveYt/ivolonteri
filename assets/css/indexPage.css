@@ -25,9 +25,9 @@ h2 {
 
 /*GLAVNI DIV ZA KARTICE O NAMA*/
 .bio {
+  margin-top: 10px;
   position: relative;
-  margin: 20px;
-  width: 28rem;
+  width: 25rem;
 }
 
 /*SLIKA U DIVU*/
@@ -37,7 +37,7 @@ h2 {
 }
 
 /*DIV S TEKSTOM KOJI PREKRIVA SLIKU I NEVIDLJIV JE PRIJE HOVERA*/
-.bio-overlay {
+ .bio-overlay {
   display: flex;
   position: absolute; 
   top: 0;
@@ -52,7 +52,7 @@ h2 {
   opacity: 0; /*SKRIVA bio-overlay PRIJE ANIMACIJE*/
   transition: opacity 0.25s; /*TRAJANJE ANIMACIJE POJAVLJIVANJA POZADINE*/
   border-radius: 25px; 
-}
+} 
 /*POSTAVLJA DULJINU ANIMACIJE POJAVLJIVA*/
 .bio-overlay > *{
   transform: translateY(20px);

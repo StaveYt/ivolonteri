@@ -1,8 +1,8 @@
 /*POTAVLJA POZADINU DA PREKRIVA ZASLON I NE PONAVLJA SE */
 body {
-	background-image: url('../img/loginBackround.jpg');
+	background-image: url('../img/loginBackground.jpg');
+	background-blend-mode: soft-light;
 	background-size: cover;
-	background-blend-mode: overlay;
 	background-repeat: no-repeat;
 }
 
@@ -10,7 +10,7 @@ h1 {
 	margin-bottom: 10px;
 }
 
-/*VELICINA I MARGINE AVATARA KORISNIKA POVIŠE LOGIN BOXA*/
+/*VELICINA I MARGINE AVATARA KORISNIKA POVISE FORMA ZA PRIJACU*/
 .avatar {
 	width: 100px;
 	height: 100px;
@@ -23,7 +23,7 @@ h1 {
 	color: #fff;
 	margin: auto;
 	margin-top: 10%;
-	width: 420px;
+	width: 350px;
 }
 
 /*DIZAJN TEXTA KOJI SE NALAZI U header-box-U*/
@@ -37,7 +37,7 @@ h1 {
 
 /*SIRINA I MARGINA DIVA KOJI SADRZI FORM ZA ULOGIRANJE*/
 .acc-box {
-	width: 420px;
+	width: 350px;
 	margin: auto;
 }
 

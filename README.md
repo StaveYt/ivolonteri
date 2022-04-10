@@ -9,4 +9,8 @@ Default users:
     user0: username: user0; password: user0123
     admin0: username: admin0; password: admin0123
 
+TIM: 
+    Branimir Vid Maljković - VOĐA
+    Paul Damjanović
+
 Projekt za EDIT 2021/22

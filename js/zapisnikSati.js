@@ -62,7 +62,6 @@ let row0 = document.getElementById("row0");
 let row1 = document.getElementById("row1");
 let recordKeeperEl;
 
-//KOMENTIRANO
 function CheckStorage(){
   currentUser = JSON.parse(sessionStorage.getItem("USER")); //STAVLJA TRENUTNOG KORINSIKA KAO SPREMLJENI KORISNIK
 
@@ -73,7 +72,7 @@ function CheckStorage(){
   }
 }
 
-//KOMENTIRANO
+//ZOVE SE NA SUBMITU FORMA ZA PRIJAVU
 function LogIn(){
   let username = document.getElementById("usernameInp").value;
   let password = document.getElementById("passwordInp").value;
@@ -99,33 +98,35 @@ function LogIn(){
   }
 }
 
-//KOMENTIRANO
+//ZOVE SE NA PRITISKU BOTUNA ZA PRIKAZATI FORM ZA NAPRAVITI RACUN
 function ShowCreateAcc(){
   let topText = document.getElementById("topText");
   topText.innerText = "Napravite račun!";
 
-  row1.innerHTML = `<form class="log-in text-light" id="log-in" onsubmit="CreateAcc(event);" style="margin-top: 5px;">
-    <div class="form-floating mb-3 text-muted">
-      <input type="text" class="form-control" id="usernameInp" placeholder="Korisničko Ime">
-      <label for="username" class="form-label">Korisničko ime</label>
-    </div>
-    <div class="form-floating mb-3 text-muted">
-      <input type="email" class="form-control" id="emailInp" placeholder="Email">
-      <label for="email" class="form-label">Email</label>
-    </div>
-    <div class="form-floating mb-3 text-muted">
-      <input type="password" class="form-control" id="passwordInp" placeholder="Lozinka">
-      <label for="password" class="form-label">Lozinka</label>
-    </div>
-    <div class="form-floating mb-3 text-muted">
-      <input type="password" class="form-control" id="confirmPasswordInp" placeholder="Potvrdite Lozinku">
-      <label for="password" class="form-label">Potvrdite Lozinku</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Potvrdi</button>
-  </form>`;
+  row1.innerHTML = `
+    <form class="log-in text-light" id="log-in" onsubmit="CreateAcc(event);" style="margin-top: 5px;">
+      <div class="form-floating mb-3 text-muted">
+        <input type="text" class="form-control" id="usernameInp" placeholder="Korisničko Ime">
+        <label for="username" class="form-label">Korisničko ime</label>
+      </div>
+      <div class="form-floating mb-3 text-muted">
+        <input type="email" class="form-control" id="emailInp" placeholder="Email">
+        <label for="email" class="form-label">Email</label>
+      </div>
+      <div class="form-floating mb-3 text-muted">
+        <input type="password" class="form-control" id="passwordInp" placeholder="Lozinka">
+        <label for="password" class="form-label">Lozinka</label>
+      </div>
+      <div class="form-floating mb-3 text-muted">
+        <input type="password" class="form-control" id="confirmPasswordInp" placeholder="Potvrdite Lozinku">
+        <label for="password" class="form-label">Potvrdite Lozinku</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Potvrdi</button>
+    </form>
+    `;
 }
 
-//KOMENTIRANO
+//ZOVE SE NA SUBMITU FORMA ZA NAPRAVIT RACUN
 function CreateAcc(e){
   e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
 
@@ -161,52 +162,51 @@ function CreateAcc(e){
   }
 }
 
-//KOMENTIRANO
 function ShowRecordKeeper(){
-  container.innerHTML = `<div class="row text-center text-white" id="row0">
-    <h2 class="username" id="username">${currentUser.username}</h2>
+  container.innerHTML = `
+    <div class="row text-center text-white" id="row0">
+      <h2 class="username" id="username">${currentUser.username}</h2>
     </div>
     <div class="row" id="row1">
-    <div class="col-md-4">
-      <form class="text-white" onsubmit="TakeRecord(event)" id="form">
-        <legend>Zapišite sate</legend>
-        <div class="mb-3">
-          <label for="activity" class="form-label">Upišite ime akcije</label>
-          <input type="text" id="activity" class="form-control" placeholder="Crveni Križ">
-        </div>
-        <div class="mb-3">
-          <label for="note" class="form-label">Bilješka</label>
-          <textarea class="form-control" id="note" rows="3"></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="choosePlace" class="form-label">Izaberite mjesto</label>
-          <select id="choosePlace" class="form-select">
-            <option disabled>Izaberite place</option>
-            <option value="Split">Split</option>
-            <option value="Dubrovnik">Dubrovnik</option>
-            <option value="Zadar">Zadar</option>
-            <option value="Šolta">Šolta</option>
-            <option value="Brač">Brač</option>
-            <option value="Omiš">Omiš</option>
-            <option value="Kaštela">Kaštela</option>
-            <option value="Trogir">Trogir</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="hours" class="form-label">Upišite broj sati</label>
-          <input type="text" id="hours" class="form-control" placeholder="69">
-        </div>
-        <div class="mb-3">
-          <label for="link" class="form-label">Upišite link</label>
-          <input type="text" id="link" class="form-control" placeholder="https://bit.ly/Ur3um">
-        </div>
-        <button type="submit" class="btn btn-primary" style="display: inline-block">Dodaj</button>
-      </form>
-    </div>
-    <div class="col text-dark" id="recordKeeper">
+      <div class="col-md-4">
+        <form class="text-white" onsubmit="TakeRecord(event)" id="form">
+          <legend>Zapišite sate</legend>
+          <div class="mb-3">
+            <label for="activity" class="form-label">Upišite ime akcije</label>
+            <input type="text" id="activity" class="form-control" placeholder="Crveni Križ">
+          </div>
+          <div class="mb-3">
+            <label for="note" class="form-label">Bilješka</label>
+            <textarea class="form-control" id="note" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="choosePlace" class="form-label">Izaberite mjesto</label>
+            <select id="choosePlace" class="form-select">
+              <option disabled>Izaberite place</option>
+              <option value="Split">Split</option>
+              <option value="Dubrovnik">Dubrovnik</option>
+              <option value="Zadar">Zadar</option>
+              <option value="Šolta">Šolta</option>
+              <option value="Brač">Brač</option>
+              <option value="Omiš">Omiš</option>
+              <option value="Kaštela">Kaštela</option>
+              <option value="Trogir">Trogir</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="hours" class="form-label">Upišite broj sati</label>
+            <input type="text" id="hours" class="form-control" placeholder="69">
+          </div>
+          <div class="mb-3">
+            <label for="link" class="form-label">Upišite link</label>
+            <input type="text" id="link" class="form-control" placeholder="https://bit.ly/Ur3um">
+          </div>
+          <button type="submit" class="btn btn-primary" style="display: inline-block">Dodaj</button>
+        </form>
       </div>
+      <div class="col text-dark" id="recordKeeper"></div>
     </div>
-  </div>`;
+  `;
 
   //DOBIVANJE HTML ELEMENATA
   row1 = document.getElementById('row1');
@@ -229,7 +229,7 @@ function ShowRecordKeeper(){
   }
 }
 
-//KOMENTIRANO
+//ZOVE SE NA SUBMITU FORMA ZA DODAT ZAPIS
 function TakeRecord(e){
   e.preventDefault(); //ZAUSTAVLJA REFRESH STRANICE
 
@@ -251,11 +251,11 @@ function TakeRecord(e){
 
     AddCard(currentRecord);
   }
-  else{alert("Ime nemože biti prazno!")}
+  else{alert("Ime akcije nemože biti prazno!")}
 }
 
-//KOMENTIRANO
-function CardRemove(activityName){
+//ZOVE SE NA PRITISKU BOTUNA ZA MAKNIT ZAPIS
+function RemoveRecord(activityName){
   //BRISE KARTICU SA STRANICE
   let activityCard = document.getElementById(activityName);
   recordKeeperEl.removeChild(activityCard);
@@ -269,20 +269,23 @@ function CardRemove(activityName){
   }
   if(currentUser.records.length == 0){location.reload()}
 }
-//KOMENTIRANO
+
 function AddCard(currentRecord){
-  recordKeeperEl.innerHTML += `<div class="card record-card" id="${currentRecord.activity}">
-    <div class="card-body">
-      <div class="card-title">
-        <h5 style="display: inline-block;">${currentRecord.activity}, ${currentRecord.place}</h5>
-        <button type="button" class="btn btn-outline-danger card-remove" onclick="CardRemove('${currentRecord.activity}')">X</button>
-      </div>
+  recordKeeperEl.innerHTML += `
+    <div class="card record-card" id="${currentRecord.activity}">
+      <div class="card-body">
+        <div class="card-title">
+          <h5 style="display: inline-block;">${currentRecord.activity}, ${currentRecord.place}</h5>
+          <button type="button" class="btn btn-outline-danger card-remove" onclick="RemoveRecord('${currentRecord.activity}')">X</button>
+        </div>
         <h6 class="card-subtitle mb-2 text-muted">Bilješka</h6>
         <p class="card-text">${currentRecord.note}</p>
         <h6 class="card-subtitle mb-2 text-muted">${currentRecord.hours} sati</h6>
-      <a href="${currentRecord.link}" target="_blank" class="btn btn-dark card-link">Posjetite grupu</a>
+        <a href="${currentRecord.link}" target="_blank" class="btn btn-dark card-link">Posjetite grupu</a>
+      </div>
     </div>
-  </div>`;
+  `;
+
   return;
 }
 

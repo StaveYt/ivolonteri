@@ -1,13 +1,11 @@
 let usersContainerEl = document.getElementById('usersContainer'); //DOBIVANJE ELEMENTA IZ HTMLA SA IDom usersContainer
 
-//NA UCITAVANJU STRANICE
 function PageLoadAdminP(){
-  ShowActivities();
-  ShowUsers();
+  ShowAllActivities(); //DODAJE KARTICE SVIH AKCIJA
+  ShowAllUsers(); //DODAJE "KARTICE" SVIH KORISNIKA
 }
 
-//DODAJE KARITCE SVIH AKCIJA
-function ShowActivities(){
+function ShowAllActivities(){
   for(let i = 0; i < activities.length; i++){
     currentActivity = activities[i];
     container.innerHTML += `<div class="card activity-card" id="${currentActivity.name}">
@@ -22,11 +20,10 @@ function ShowActivities(){
   }
 }
 
-//DODAJE KARTICE SVIH (OSIM TRENUTNOG) KORISNIKA
-function ShowUsers(){
+function ShowAllUsers(){
   for(let i = 0; i < users.length; i++){
     if(users[i].username != currentUser.username){
-			//AKO JE ADMIN UMISTO Make Admin STAVLJAMO Make User
+			//AKO JE ADMIN UMISTO "Make Admin" STAVLJAMO "Make User"
       if (users[i].rank == 'admin'){
         usersContainerEl.innerHTML += `<div class="user-manager" id="${users[i].username}">
           <h4>${users[i].username}</h4>
@@ -34,27 +31,33 @@ function ShowUsers(){
           <button type="button" class="btn btn-outline-danger" onclick="DeleteAcc('${users[i].username}')">X</button>
         </div>`
       } else{
-      	usersContainerEl.innerHTML += `<div class="user-manager" id="${users[i].username}">
-        	<h4>${users[i].username}</h4>
-          <button class="btn btn-primary" onclick="ChangeRank('${users[i].username}')" id="changeRank">Make Admin</button>
-          <button type="button" class="btn btn-outline-danger" onclick="DeleteAcc('${users[i].username}')">X</button>
-        </div>`
+      	usersContainerEl.innerHTML += `
+          <div class="user-manager" id="${users[i].username}">
+        	  <h4>${users[i].username}</h4>
+            <button class="btn btn-primary" onclick="ChangeRank('${users[i].username}')" id="changeRank">Make Admin</button>
+            <button type="button" class="btn btn-outline-danger" onclick="DeleteAcc('${users[i].username}')">X</button>
+          </div>
+        `
       }
     }
   }
 }
 
+//ZOVE SE NA KADA SE PRITISNE BOTUN ZA MAKNIT KORISNIKA
 function DeleteAcc(user){
-  let userCard = document.getElementById(user);
-  usersContainerEl.removeChild(userCard);
-  for (let i = 0; i < users.length; i++){
-    if (users[i].username == user){ users.splice(i, 1); }
-  }
+  let userCard = document.getElementById(user); //DOBIVA KARTICU KORISNIKA ZA KOJEG MIJENJAMO RANK
+  usersContainerEl.removeChild(userCard); //BRISEMO TU KARTICU
 
-  localStorage.setItem('USERS',JSON.stringify(users));
+  //TRAZIMO KORISNIKA U NIZU KORISNICI I AKO POSTOJI BRISEMO GA
+  for (let i = 0; i < users.length; i++){
+    if (users[i].username == user){
+      users.splice(i, 1); 
+      localStorage.setItem('USERS',JSON.stringify(users)); //SPREMA PROMJENE U localStorage
+    }
+  }
 }
 
-//KOMENTIRANO
+//ZOVE SE NA KADA SE PRITISNE BOTUN ZA PROMJENIT RANK KORISNIKA
 function ChangeRank(user){
   //U NIZU users TRAZIMO KORISNIKA ZA KOJEG ZELIMO PROMJENITI RANK IONDA GA PROMJENIMO I SPREMIMO PROMJENE 
 	for (let i = 0; i < users.length; i++){
@@ -68,7 +71,7 @@ function ChangeRank(user){
   }
 }
 
-//KOMENTIRANO
+//ZOVE SE NA KADA SE PRITISNE BOTUN ZA MAKNIT AKCIJU
 function RemoveActivityCard(activity){
   container.removeChild(document.getElementById(activity)); //BRISEMO KARTICU TE AKCIJE
 

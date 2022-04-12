@@ -170,7 +170,7 @@ function Filter(chosenTag){
     //AKO JE OVO BIO ZADNJI UPALJENI FILTER ONDA SE DODAJU NAZAD SVE KARTICE, AKO NIJE ONDA SAMO BRISEMO KARTICE SA TIM TIPOM
     if (activatedFilters.length == 0){
       container.innerHTML = '';
-      AddAll();
+      AddAllActivities();
     } 
     else{ DeleteExcess(chosenTag); }
 
